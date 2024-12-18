@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar - DotGeeks</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="/img/D.png" alt="DotGeeks Logo">
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="/" data-lang="navHome">Home</a></li>
+                    <li><a href="/courses.html" data-lang="navCourses">Cursos</a></li>
+                    <li><a href="#sobre" data-lang="navAbout">Sobre</a></li>
+                    <li><a href="#contato" data-lang="navContact">Contato</a></li>
+                </ul>
+            </nav>
+    
+            <div class="header-right">
+                <div class="toggles">
+                    <div class="language-toggle">
+                        <button id="language-btn">🇧🇷 PT</button>
+                    </div>
+                    <div class="theme-toggle">
+                        <button id="theme-btn">☀️ Light</button>
+                    </div>
+                </div>
+                <div class="auth-buttons">
+                    <a href="/login.html" class="auth-btn login" data-lang="loginButton">Entrar</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="register-container">
+            <h2 data-lang="loginTitle">Registrar</h2>
+            <form class="register-form">
+                <div class="form-group">
+                    <label for="name" data-lang="nameLabel">Nome</label>
+                    <input type="name" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email" data-lang="emailLabel">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password" data-lang="passwordLabel">Senha</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="passwordConfirm" data-lang="passwordConfirmLabel">Confirmar Senha</label>
+                    <input type="passwordConfirm" id="passwordConfirm" name="passwordConfirm" required>
+                </div>
+                <button type="submit" class="register-btn" data-lang="loginButton">Registrar</button>
+                <div class="login-link">
+                    <span data-lang="haveAccount">Já tem uma conta?</span>
+                    <a href="/login.html" data-lang="loginLink">Login</a>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p data-lang="footerRights">© 2024 DotGeeks. Todos os direitos reservados.</p>
+            <div class="social-links">
+                <a href="https://github.com/Larsenvini" target="_blank" aria-label="GitHub">
+                    <img src="/img/icons8-github.svg" alt="GitHub Logo" class="social-icon">
+                </a>
+                <a href="https://www.linkedin.com/in/vinilarsen" target="_blank" aria-label="LinkedIn">
+                    <img src="/img/icons8-linkedin.svg" alt="LinkedIn Logo" class="social-icon">
+                </a>
+                <a href="https://discord.gg/pMGNuQfM" target="_blank" aria-label="Discord">
+                    <img src="/img/icons8-discord-64.svg" alt="Discord Logo" class="social-icon">
+                </a>
+            </div>
+        </div>
+    </footer>
+    <script src="/js/main.js"></script>
+</body>
+</html>

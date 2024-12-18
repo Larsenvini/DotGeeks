@@ -16,22 +16,24 @@ document.addEventListener('DOMContentLoaded', async () => {
             navCourses: 'Cursos',
             navAbout: 'Sobre',
             navContact: 'Contato',
-            coursesTitle: 'Lista de Cursos',
+            coursesTitle: 'Cursos',
             loadingCourses: 'Carregando cursos...',
             footerRights: '© 2024 DotGeeks. Todos os direitos reservados.',
             noCourses: 'Nenhum curso disponível no momento.',
-            courseError: 'Erro ao carregar os cursos. Tente novamente mais tarde.'
+            courseError: 'Erro ao carregar os cursos. Tente novamente mais tarde.',
+            viewCourse: 'Ver Curso'
         },
         en: {
             navHome: 'Home',
             navCourses: 'Courses',
             navAbout: 'About',
             navContact: 'Contact',
-            coursesTitle: 'Course List',
+            coursesTitle: 'Courses',
             loadingCourses: 'Loading courses...',
             footerRights: '© 2024 DotGeeks. All rights reserved.',
             noCourses: 'No courses available at the moment.',
-            courseError: 'Error loading courses. Please try again later.'
+            courseError: 'Error loading courses. Please try again later.',
+            viewCourse: 'View Course'
         }
     };
 
@@ -79,6 +81,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 courseDiv.innerHTML = `
                     <h3>${course.title}</h3>
                     <p>${course.description}</p>
+                    <a href="/courses/${course.id}" class="btn" data-lang="viewCourse">${translations[currentLanguage].viewCourse}</a>
                 `;
                 container.appendChild(courseDiv);
             });

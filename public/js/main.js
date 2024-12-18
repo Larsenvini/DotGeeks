@@ -2,20 +2,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const languageBtn = document.getElementById('language-btn');
     const themeBtn = document.getElementById('theme-btn');
     const body = document.body;
-    const featureContainers = document.querySelectorAll('.feature'); // Select all feature containers
+    const featureContainers = document.querySelectorAll('.feature');
 
-    let currentLanguage = 'pt'; // Default language is Portuguese
-    let isDarkMode = false; // Default theme is Light Mode
+    let currentLanguage = 'pt';
+    let isDarkMode = false;
 
     const translations = {
         pt: {
             button: '🇧🇷 PT',
-            heroTitle: 'Transforme seu Aprendizado Tech',
-            heroSubtitle: 'Explore. Aprenda. Domine.',
             navHome: 'Home',
             navCourses: 'Cursos',
             navAbout: 'Sobre',
             navContact: 'Contato',
+            loginButton: 'Entrar',
+            registerLink: 'Registrar',
+            loginLink: 'Entrar',
+            noAccount: 'Não tem uma conta?',
+            haveAccount: 'Já tem uma conta?',
+            heroTitle: 'Transforme seu Aprendizado Tech',
+            heroSubtitle: 'Explore. Aprenda. Domine.',
             ctaPrimaryCTA: 'Ver Cursos',
             ctaSecondaryCTA: 'Saiba Mais',
             featureCourses: 'Cursos Interativos',
@@ -24,16 +29,23 @@ document.addEventListener('DOMContentLoaded', () => {
             featureDescription2: 'Node.js, Express, MongoDB e muito mais',
             featureCommunity: 'Comunidade Geek',
             featureDescription3: 'Conecte-se com outros desenvolvedores',
-            footerRights: '© 2024 DotGeeks. Todos os direitos reservados.'
+            footerRights: '© 2024 DotGeeks. Todos os direitos reservados.',
+            themeLight: '☀️ Claro',
+            themeDark: '🌙 Escuro'
         },
         en: {
             button: '🇺🇸 EN',
-            heroTitle: 'Transform Your Tech Learning',
-            heroSubtitle: 'Explore. Learn. Master.',
             navHome: 'Home',
             navCourses: 'Courses',
             navAbout: 'About',
             navContact: 'Contact',
+            loginButton: 'Log In',
+            registerLink: 'Register',
+            loginLink: 'Login',
+            noAccount: 'Don’t have an account?',
+            haveAccount: 'Already have an account?',
+            heroTitle: 'Transform Your Tech Learning',
+            heroSubtitle: 'Explore. Learn. Master.',
             ctaPrimaryCTA: 'View Courses',
             ctaSecondaryCTA: 'Learn More',
             featureCourses: 'Interactive Courses',
@@ -42,56 +54,39 @@ document.addEventListener('DOMContentLoaded', () => {
             featureDescription2: 'Node.js, Express, MongoDB, and more',
             featureCommunity: 'Geek Community',
             featureDescription3: 'Connect with other developers',
-            footerRights: '© 2024 DotGeeks. All rights reserved.'
+            footerRights: '© 2024 DotGeeks. All rights reserved.',
+            themeLight: '☀️ Light',
+            themeDark: '🌙 Dark'
         }
     };
 
-    // Function to update language
     const updateLanguage = (lang) => {
         currentLanguage = lang;
         const content = translations[lang];
 
-        // Update language button text
-        languageBtn.textContent = content.button;
-
-        // Update all elements with data-lang attributes
         document.querySelectorAll('[data-lang]').forEach((element) => {
             const key = element.dataset.lang;
-            element.textContent = content[key];
+            if (content[key]) {
+                element.textContent = content[key];
+            }
         });
     };
 
-    // Theme toggle functionality
     const updateTheme = () => {
         isDarkMode = !isDarkMode;
-
-        // Toggle dark mode class on body
         body.classList.toggle('dark-mode');
-
-        // Update theme button text
-        themeBtn.textContent = isDarkMode ? '🌙 Dark' : '☀️ Light';
-
-        
+        themeBtn.textContent = isDarkMode ? translations[currentLanguage].themeDark : translations[currentLanguage].themeLight;
         featureContainers.forEach((feature) => {
-            feature.style.backgroundColor = isDarkMode
-                ? 'var(--custom)'
-                : 'var(--secondary-color)';
+            feature.style.backgroundColor = isDarkMode ? 'var(--custom)' : 'var(--secondary-color)';
         });
     };
 
-    // Add event listeners
     themeBtn.addEventListener('click', updateTheme);
-
     languageBtn.addEventListener('click', () => {
         const newLanguage = currentLanguage === 'pt' ? 'en' : 'pt';
         updateLanguage(newLanguage);
     });
 
-    // Initialize default settings
-    updateLanguage(currentLanguage); // Set initial language
-    themeBtn.textContent = '☀️ Light'; // Set initial theme text
-
-    featureContainers.forEach((feature) => {
-        feature.style.backgroundColor = 'var(--secondary-color)';
-    });
+    updateLanguage(currentLanguage);
+    themeBtn.textContent = translations[currentLanguage].themeLight;
 });
