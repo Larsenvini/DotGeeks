@@ -26,6 +26,7 @@ body {
     display: flex;
     flex-direction: column;
 }
+
 main {
     flex: 1;
 }
@@ -35,17 +36,36 @@ body.dark-mode {
     color: var(--text-color-light);
 }
 
-.logo {
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0 80px;
+    height: 100px;
     position: fixed;
-    top: 0px;
+    width: 100%;
+    top: 0;
     z-index: 100;
-    padding-left: 30px;
-    height: 100px; 
-    width: 100px;  
+}
+
+.header-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.logo {
+    position: static;
+    height: 80px;
+    width: 80px;
+    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden; 
+    overflow: hidden;
 }
 
 .logo img {
@@ -54,52 +74,15 @@ body.dark-mode {
     object-fit: contain;
 }
 
-.language-toggle, .theme-toggle {
-    position: fixed;
-    top: 20px;
-    z-index: 100;
-}
-
-.language-toggle {
-    right: 150px;
-}
-
-.theme-toggle {
-    right: 30px;
-}
-
-.language-toggle button, 
-.theme-toggle button {
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 15px 20px;
-    border-radius: 6px;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-}
-
-.language-toggle button:hover, 
-.theme-toggle button:hover {
-    transform: scale(1.05); /* Slight enlargement on hover */
-}
-
-
-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 35px 50px;
-    background-color: var(--primary-color);
-    color: white;
+nav {
+    flex-grow: 1;
+    margin-left: 40px;
 }
 
 nav ul {
     display: flex;
     list-style: none;
-    gap: 20px;
-    justify-content: center;
+    gap: 30px;
 }
 
 nav ul li a {
@@ -113,6 +96,132 @@ nav ul li a:hover {
     color: var(--secondary-color);
 }
 
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.toggles {
+    display: flex;
+    gap: 10px;
+}
+
+.language-toggle,
+.theme-toggle {
+    position: static;
+}
+
+.language-toggle button,
+.theme-toggle button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.language-toggle button:hover,
+.theme-toggle button:hover {
+    transform: scale(1.05);
+}
+
+.auth-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+/* Auth button styles */
+.auth-btn {
+    display: inline-flex;
+    align-items: center; /* Ensures text and icon are vertically aligned */
+    justify-content: center; /* Centers the content horizontally */
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.auth-btn.login {
+    background-color: var(--secondary-color);
+    color: var(--text-color-light);
+    border: none;
+    position: relative;
+}
+
+.auth-btn.login::before {
+    content: "";
+    display: inline-block;
+    margin-right: 10px;
+    width: 16px;
+    height: 16px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4M10 17l5-5-5-5M13 12H3'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.auth-btn.login:hover {
+    background-color: rgba(228, 38, 120, 0.8);
+    box-shadow: 0 2px 8px rgba(228, 38, 120, 0.4);
+}
+
+
+
+
+/* New Register Button Styles */
+.new-register-btn {
+    display: inline-block; /* Makes it a proper button */
+    padding: 12px 25px; /* Spacing inside the button */
+    color: #ffffff; /* White text color */
+    font-family: 'Poppins', sans-serif; /* Font */
+    font-size: 1.1rem; /* Text size */
+    font-weight: 600; /* Bold font */
+    text-align: center; /* Center the text */
+    text-decoration: none; /* Remove underline */
+    background-color: transparent; /* No background */
+    transition: all 0.3s ease; /* Smooth hover effects */
+}
+
+/* Hover Effect */
+.new-register-btn:hover {
+    background-color: #e42678; /* Solid background on hover */
+    color: #ffffff; /* Keep text white */
+    box-shadow: 0 2px 8px rgba(228, 38, 120, 0.4); /* Shadow effect */
+    transform: translateY(-2px); /* Slight lift */
+}
+
+
+/* Icons for auth buttons */
+.auth-btn.login::before {
+    content: "";
+    display: inline-block;
+    margin-right: 10px;
+    width: 16px;
+    height: 16px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4M10 17l5-5-5-5M13 12H3'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+
+/* Accessibility */
+.auth-btn:focus {
+    outline: 2px dashed var(--secondary-color);
+    outline-offset: 4px;
+}
+
+/* Hero Section */
 #hero {
     text-align: center;
     padding: 100px 20px;
@@ -129,6 +238,8 @@ nav ul li a:hover {
     color: var(--text-color-light);
     padding-bottom: 10px;
 }
+
+/* Button Styles */
 .cta-buttons {
     display: flex;
     justify-content: center;
@@ -168,13 +279,13 @@ nav ul li a:hover {
     border-color: var(--background-light);
 }
 
+/* Features Section */
 #features {
     display: flex;
     justify-content: space-around;
     padding: 50px 20px;
     text-align: center;
-    transition: background-color 0.3s ease; /* Smooth background transition */
-    
+    transition: background-color 0.3s ease;
 }
 
 .feature {
@@ -184,6 +295,7 @@ nav ul li a:hover {
     border-radius: 10px;
 }
 
+/* Footer Styles */
 footer {
     background-color: var(--primary-color);
     color: white;
@@ -222,4 +334,184 @@ footer {
 
 .social-icon:hover {
     transform: scale(1.2);
+}
+
+/* Courses Grid */
+.courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    justify-items: center;
+}
+
+/* Course Cards */
+.course-card {
+    background-color: var(--secondary-color);
+    color: var(--text-color-light);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+}
+
+.course-card h3 {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.course-card p {
+    margin-bottom: 15px;
+    font-size: 1rem;
+}
+
+.course-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+.course-card .btn {
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+    border: 2px solid var(--text-color-light);
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 600;
+    display: inline-block;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+}
+
+.course-card .btn:hover {
+    background-color: var(--text-color-light);
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+h2[data-lang="coursesTitle"] {
+    text-align: center;
+    margin: 20px auto;
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+/* Registration Page Styles */
+.register-container {
+    max-width: 500px;
+    margin: 150px auto 50px;
+    padding: 30px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: var(--text-color-dark);
+    font-size: 1rem;
+    margin-bottom: 4px;
+    position: relative;
+    left: 4px;
+}
+
+.form-group input {
+    padding: 12px;
+    border: 2px solid var(--background-light);
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+}
+
+.register-btn {
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    /* Make sure button text is visible */
+    opacity: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.register-btn:hover {
+    background-color: rgba(228, 38, 120, 0.8);
+    transform: translateY(-2px);
+}
+
+/* Button text */
+.register-btn::after {
+    content: "Registrar";  /* Or "Confirmar" depending on your preference */
+    position: relative;
+    visibility: visible;
+    opacity: 1;
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.login-link a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+/* Dark mode styles */
+.dark-mode .register-container {
+    background: var(--custom);
+    color: var(--text-color-light);
+}
+
+.dark-mode .form-group label {
+    color: var(--text-color-light);
+}
+
+.dark-mode .form-group input {
+    background: var(--primary-color);
+    color: var(--text-color-light);
+    border-color: var(--secondary-color);
+}
+
+/* Register page title */
+[data-lang="registerTitle"] {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--secondary-color);
+    /* Make sure title is visible */
+    opacity: 1;
+    visibility: visible;
+}
+
+.register-btn::after {
+    content: none; /* This removes the appended text */
 }

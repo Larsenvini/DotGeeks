@@ -15,29 +15,46 @@
         <button id="theme-btn">☀️ Light</button>
     </div>
     
-    <!-- Logo -->
-    <div class="logo">
-        <img src="/img/D.png" alt="DotGeeks Logo">
-    </div>
-
     <!-- Header -->
     <header>
-        <nav>
-            <ul>
-                <li><a href="/" data-lang="navHome">Home</a></li>
-                <li><a href="/courses.html" data-lang="navCourses">Cursos</a></li>
-                <li><a href="#sobre" data-lang="navAbout">Sobre</a></li>
-                <li><a href="#contato" data-lang="navContact">Contato</a></li>
-            </ul>
-        </nav>
+        <div class="header-container">
+            <div class="logo">
+                <img src="/img/D.png" alt="DotGeeks Logo">
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="/" data-lang="navHome">Home</a></li>
+                    <li><a href="/courses.html" data-lang="navCourses">Cursos</a></li>
+                    <li><a href="#sobre" data-lang="navAbout">Sobre</a></li>
+                    <li><a href="#contato" data-lang="navContact">Contato</a></li>
+                </ul>
+            </nav>
+    
+            <div class="header-right">
+                <div class="toggles">
+                    <div class="language-toggle">
+                        <button id="language-btn">🇧🇷 PT</button>
+                    </div>
+                    <div class="theme-toggle">
+                        <button id="theme-btn">☀️ Light</button>
+                    </div>
+                </div>
+                <div class="auth-buttons">
+                    <a href="/login.html" class="auth-btn login" data-lang="loginButton">Entrar</a>
+                    <a href="/register.html" class="new-register-btn" data-lang="registerLink">Registrar</a>
+                </div>
+            </div>
+        </div>
     </header>
+    
 
     <!-- Main Content -->
     <main>
         <section>
-            <h2 data-lang="coursesTitle">Lista de Cursos</h2>
-            <div id="courses-container">
-                <!-- Courses will be loaded dynamically -->
+            <h2 data-lang="coursesTitle">Cursos</h2>
+            <div id="courses-container" class="courses-grid">
+                <!-- Courses will be dynamically loaded -->
                 <p data-lang="loadingCourses">Carregando cursos...</p>
             </div>
         </section>

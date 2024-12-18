@@ -1,89 +1,55 @@
 import { Router } from 'express';
 import { Course } from '../models/course';
+import { authenticate, authorize } from '../middleware/auth';
+import mongoose from 'mongoose';
 
 const router = Router();
 
 // Create a new course
-router.post('/', async (req, res) => {
+router.post('/', authenticate, authorize(['organization']), async (req, res) => {
+    if (!req.user) {
+        return res.status(401).json({ error: 'Unauthorized' });
+    }
+
     try {
-        const { title, description, content } = req.body;
+        const { title, description } = req.body;
 
-        // Create and save the new course
-        const newCourse = new Course({ title, description, content });
+        const newCourse = new Course({
+            title,
+            description,
+            videos: [],
+            creator: new mongoose.Types.ObjectId(req.user._id as mongoose.Types.ObjectId) // Explicitly cast _id
+        });
+
         await newCourse.save();
-
         res.status(201).json(newCourse);
     } catch (err) {
-        if (err instanceof Error) {
-            res.status(500).json({ error: err.message });
-        } else {
-            res.status(500).json({ error: 'Unknown error occurred' });
-        }
+        res.status(500).json({ error: 'Failed to create course' });
     }
 });
 
-// Get all courses
-router.get('/', async (req, res) => {
-    try {
-        const courses = await Course.find();
-        res.status(200).json(courses);
-    } catch (err) {
-        res.status(500).json({ error: 'Failed to fetch courses' });
+// Upload videos to a course
+router.post('/:id/videos', authenticate, authorize(['organization']), async (req, res) => {
+    if (!req.user) {
+        return res.status(401).json({ error: 'Unauthorized' });
     }
-});
 
-// Get a single course by ID
-router.get('/:id', async (req, res) => {
     try {
         const { id } = req.params;
+        const { url } = req.body;
+
         const course = await Course.findById(id);
-
-        if (!course) {
-            return res.status(404).json({ error: 'Course not found' });
+        if (!course || !course.creator.equals(new mongoose.Types.ObjectId(req.user._id as mongoose.Types.ObjectId))) {
+            return res.status(403).json({ error: 'Unauthorized' });
         }
 
-        res.status(200).json(course);
+        const newVideoNumber = course.videos.length + 1;
+        course.videos.push({ number: newVideoNumber, url });
+        await course.save();
+
+        res.status(201).json(course);
     } catch (err) {
-        res.status(500).json({ error: 'Failed to fetch course' });
-    }
-});
-
-// Update a course by ID
-router.put('/:id', async (req, res) => {
-    try {
-        const { id } = req.params;
-        const { title, description, content } = req.body;
-
-        const updatedCourse = await Course.findByIdAndUpdate(
-            id,
-            { title, description, content },
-            { new: true } // Return the updated document
-        );
-
-        if (!updatedCourse) {
-            return res.status(404).json({ error: 'Course not found' });
-        }
-
-        res.status(200).json(updatedCourse);
-    } catch (err) {
-        res.status(500).json({ error: 'Failed to update course' });
-    }
-});
-
-// Delete a course by ID
-router.delete('/:id', async (req, res) => {
-    try {
-        const { id } = req.params;
-
-        const deletedCourse = await Course.findByIdAndDelete(id);
-
-        if (!deletedCourse) {
-            return res.status(404).json({ error: 'Course not found' });
-        }
-
-        res.status(200).json({ message: 'Course deleted successfully' });
-    } catch (err) {
-        res.status(500).json({ error: 'Failed to delete course' });
+        res.status(500).json({ error: 'Failed to upload video' });
     }
 });
 

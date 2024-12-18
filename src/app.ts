@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import courseRoutes from './routers/course';
+import userRoutes from './routers/user';
 
 // Load environment variables
 dotenv.config();
@@ -28,7 +29,8 @@ mongoose
 app.use(bodyParser.json());
 
 // API routes
-app.use('/api/courses', courseRoutes);
+app.use('/api/users', userRoutes); // User routes
+app.use('/api/courses', courseRoutes); // Course routes
 
 // Serve the main HTML files
 app.get('/', (req, res) => {
@@ -37,6 +39,14 @@ app.get('/', (req, res) => {
 
 app.get('/courses.html', (req, res) => {
     res.sendFile(path.join(__dirname, '../views/courses.html'));
+});
+
+app.get('/login.html', (req, res) => {
+    res.sendFile(path.join(__dirname, '../views/login.html'));
+});
+
+app.get('/register.html', (req, res) => {
+    res.sendFile(path.join(__dirname, '../views/register.html'));
 });
 
 // Catch-all route for undefined routes
